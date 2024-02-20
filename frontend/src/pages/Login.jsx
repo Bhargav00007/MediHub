@@ -1,32 +1,74 @@
 import natureImg from "../img/nature.jpg";
-import InputBox from "../components/InputBox";
 import Button from "../components/Button";
 import Break from "../components/Break";
 import BottomWarning from "../components/BottomWarning";
 import Logo from "../components/Logo";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 function Login() {
+	const formik = useFormik({
+		initialValues: {
+			email: "",
+			password: "",
+		},
+		validationSchema: Yup.object({
+			email: Yup.string()
+				.email("Invalid Email address")
+				.required("Email is required"),
+			password: Yup.string()
+				.min(6, "Password must be 6 characters or more")
+				.max(18, "Password must be 18 characters or less")
+				.required("Password is required"),
+		}),
+		onSubmit: (values) => {
+			console.log(values);
+		},
+	});
 	return (
-		<section className="bg-blue-50 min-h-screen flex items-center justify-center">
-			<div className="bg-blue-100 flex rounded-2xl shadow-lg max-w-3xl p-5">
-				<div className=" flex">
+		<section className="flex items-center justify-center min-h-screen bg-blue-50">
+			<div className="flex max-w-3xl p-5 bg-blue-100 shadow-lg rounded-2xl">
+				<div className="flex ">
 					{/* form */}
 					<div className="sm:w-1/2">
 						<Logo></Logo>
-						<p className="text-sm text-gray-500 mt-4 mb-3 ">
+						<p className="mt-4 mb-3 text-sm text-gray-500 ">
 							Enter your credentials to access your account
 						</p>
 						<form
-							className="flex flex-col gap-4"
+							onSubmit={formik.handleSubmit}
+							className="flex flex-col gap-1"
 							action="">
-							<InputBox
-								type={"email"}
-								placeholder={"Email"}
-								label={"email"}></InputBox>
-							<InputBox
-								type={"password"}
-								placeholder={"Password"}
-								label={"password"}></InputBox>
+							<div className="flex flex-col">
+								<label
+									htmlFor="email"
+									className="px-1 text-xs">
+									Email
+								</label>
+								<input
+									className="p-1 text-sm border-2 border-gray-200 outline-none rounded-xl focus:border-blue-300"
+									type="Email"
+									name="email"
+									placeholder="Enter your Last Name"
+									value={formik.values.email}
+									onChange={formik.handleChange}
+								/>
+							</div>
+							<div className="flex flex-col">
+								<label
+									htmlFor="password"
+									className="px-1 text-xs">
+									Password
+								</label>
+								<input
+									className="p-1 text-sm text-base border-2 border-gray-200 outline-none rounded-xl focus:border-blue-300"
+									type="Password"
+									name="password"
+									placeholder="Enter your Password"
+									value={formik.values.password}
+									onChange={formik.handleChange}
+								/>
+							</div>
 							<Button label={"Log In"}></Button>
 						</form>
 						<Break></Break>
@@ -38,7 +80,7 @@ function Login() {
 					</div>
 
 					{/* image */}
-					<div className="sm:block hidden w-1/2 p-5 ">
+					<div className="hidden w-1/2 p-5 sm:block ">
 						<img
 							className=" rounded-2xl"
 							src={natureImg}

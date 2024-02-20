@@ -64,7 +64,7 @@ export default function SideBar() {
 					/>
 				</section>
 			</nav>
-			<hr className="mx-20  h-px  bg-gray-200 border-0 dark:bg-gray-400 " />
+			<hr className="  h-px  bg-gray-200 border-0 dark:bg-gray-400 " />
 		</main>
 	);
 }
