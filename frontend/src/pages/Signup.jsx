@@ -5,8 +5,11 @@ import BottomWarning from "../components/BottomWarning";
 import Logo from "../components/Logo";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Await, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Signup() {
 	const formik = useFormik({
 		initialValues: {
@@ -14,6 +17,7 @@ function Signup() {
 			email: "",
 			password: "",
 		},
+
 		validationSchema: Yup.object({
 			name: Yup.string()
 				.max(18, "Name must be 18 characters or less")
@@ -26,25 +30,45 @@ function Signup() {
 				.max(18, "Password must be 18 characters or less")
 				.required("Password is required"),
 		}),
+
 		onSubmit: async (values) => {
 			console.log(values);
-			const res = await axios.post(
-				"http://localhost:3000/signup",
-				{
-					name: values.name,
-					email: values.email,
-					password: values.password,
-				},
-				{
-					headers: {
-						Authorization: values.email,
-						users: values.name,
-					},
+			const data = {
+				name: values.name,
+				username: values.email,
+				password: values.password,
+			};
+			try {
+				const res = await axios.post(
+					"http://localhost:3000/api/v1/user/signup",
+					data,
+					{
+						headers: {
+							"Content-Type": "application/json",
+						},
+					}
+				);
+				if (res.status === 200) {
+					toast.success("User Created", {
+						theme: "light",
+						autoClose: 1200,
+					});
+					setTimeout(() => {
+						navigate("/dashboard");
+					}, 2000);
 				}
-			);
-			// navigate("/dashboard");
+			} catch (e) {
+				toast.warn("Email already taken / Incorrect inputs", {
+					theme: "light",
+					autoClose: 1200,
+				});
+				setTimeout(() => {
+					navigate("/dashboard");
+				}, 2000);
+			}
 		},
 	});
+
 	const navigate = useNavigate();
 	return (
 		<section className="flex items-center justify-center min-h-screen bg-blue-50 ">
@@ -73,7 +97,7 @@ function Signup() {
 										: "Name"}
 								</label>
 								<input
-									className="p-1 text-sm text-base border-2 border-gray-200 outline-none rounded-xl focus:border-blue-300"
+									className="p-1 text-base border-2 border-gray-200 outline-none rounded-xl focus:border-blue-300"
 									type="text"
 									name="name"
 									id="name"
@@ -123,7 +147,7 @@ function Signup() {
 										: "Password"}
 								</label>
 								<input
-									className="p-1 text-sm text-base border-2 border-gray-200 outline-none rounded-xl focus:border-blue-300"
+									className="p-1 text-base border-2 border-gray-200 outline-none rounded-xl focus:border-blue-300"
 									type="Password"
 									name="password"
 									id="password"
@@ -137,7 +161,6 @@ function Signup() {
 							<Button label={"Sign Up"}></Button>
 						</form>
 						<Break></Break>
-						{/* <Link></Link> */}
 						<BottomWarning
 							label={"Already have an account?"}
 							buttonText={"Log In"}
@@ -153,6 +176,7 @@ function Signup() {
 					</div>
 				</div>
 			</div>
+			<ToastContainer />
 		</section>
 	);
 }
