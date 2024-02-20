@@ -2,6 +2,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
 
 function App() {
 	return (
@@ -17,6 +18,9 @@ function App() {
 					<Route
 						path="/dashboard"
 						element={<Dashboard></Dashboard>}></Route>
+					<Route
+						path="/"
+						element={<Home></Home>}></Route>
 				</Routes>
 			</BrowserRouter>
 		</>

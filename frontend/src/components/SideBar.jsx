@@ -7,8 +7,8 @@ import clsx from "clsx";
 export default function SideBar() {
 	const [isSideMenuOpen, setMenu] = useState(false);
 	return (
-		<main className="bg-gray-100 ">
-			<nav className="flex justify-between px-8 items-center py-6  lg:px-16">
+		<main className="bg-blue-100 ">
+			<nav className="flex items-center justify-between px-8 py-6 lg:px-16">
 				<div className="flex justify-between gap-8">
 					<section className="flex items-center gap-4">
 						<FiMenu
@@ -16,24 +16,24 @@ export default function SideBar() {
 								setMenu(true);
 								console.log(isSideMenuOpen);
 							}}
-							className="text-3xl lg:hidden cursor-pointer"></FiMenu>
+							className="text-3xl cursor-pointer lg:hidden"></FiMenu>
 						<Link>
-							<h2 className="italic font-bold  text-blue-900 text-3xl">
+							<h2 className="text-3xl italic font-bold text-blue-900">
 								MediHub
 							</h2>
 						</Link>
 					</section>
-					<div className="flex gap-8 pt-2  ">
-						<Link className=" hidden lg:block  hover:text-black text-gray-400">
+					<div className="flex gap-8 pt-2 ">
+						<Link className="hidden text-gray-400  lg:block hover:text-black">
 							Collection
 						</Link>
-						<Link className=" hidden lg:block hover:text-black text-gray-400">
+						<Link className="hidden text-gray-400  lg:block hover:text-black">
 							Collection
 						</Link>
-						<Link className=" hidden lg:block hover:text-black text-gray-400">
+						<Link className="hidden text-gray-400  lg:block hover:text-black">
 							Collection
 						</Link>
-						<Link className=" hidden lg:block hover:text-black text-gray-400">
+						<Link className="hidden text-gray-400  lg:block hover:text-black">
 							Collection
 						</Link>
 					</div>
@@ -42,7 +42,7 @@ export default function SideBar() {
 							" fixed h-full w-screen lg:hidden bg-black/50  backdrop-blur-sm top-0 right-0  -translate-x-full  transition-all ",
 							isSideMenuOpen && "translate-x-0"
 						)}>
-						<section className="text-black w-56 bg-gray-100 flex-col absolute left-0 top-0 h-screen p-8 gap-8 z-50 flex">
+						<section className="absolute top-0 left-0 z-50 flex flex-col w-56 h-screen gap-8 p-8 text-black bg-gray-100">
 							<IoCloseOutline
 								onClick={() => {
 									setMenu(false);
@@ -58,13 +58,13 @@ export default function SideBar() {
 				</div>
 				<section>
 					<img
-						className="h-8 w-8 rounded-full"
+						className="w-8 h-8 rounded-full"
 						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK6L3sOn3ZVY3Uv4TEoDGVtTM4ewYZYwjiu-L0HoTBNYM58ZvDSD80c_6HwD8CTh5baNY&usqp=CAU"
 						alt=""
 					/>
 				</section>
 			</nav>
-			<hr className="  h-px  bg-gray-200 border-0 dark:bg-gray-400 " />
+			<hr className="h-px bg-gray-200 border-0  dark:bg-gray-400" />
 		</main>
 	);
 }
