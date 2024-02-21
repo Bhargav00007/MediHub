@@ -24,16 +24,16 @@ export default function SideBar() {
 						</Link>
 					</section>
 					<div className="flex gap-8 pt-2 ">
-						<Link className="hidden text-gray-400  lg:block hover:text-black">
+						<Link className="hidden text-gray-400 lg:block hover:text-black">
 							Collection
 						</Link>
-						<Link className="hidden text-gray-400  lg:block hover:text-black">
+						<Link className="hidden text-gray-400 lg:block hover:text-black">
 							Collection
 						</Link>
-						<Link className="hidden text-gray-400  lg:block hover:text-black">
+						<Link className="hidden text-gray-400 lg:block hover:text-black">
 							Collection
 						</Link>
-						<Link className="hidden text-gray-400  lg:block hover:text-black">
+						<Link className="hidden text-gray-400 lg:block hover:text-black">
 							Collection
 						</Link>
 					</div>
@@ -56,15 +56,15 @@ export default function SideBar() {
 						</section>
 					</div>
 				</div>
-				<section>
+				<div>
 					<img
-						className="w-8 h-8 rounded-full"
+						className="w-auto rounded-full max-h-12 "
 						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK6L3sOn3ZVY3Uv4TEoDGVtTM4ewYZYwjiu-L0HoTBNYM58ZvDSD80c_6HwD8CTh5baNY&usqp=CAU"
 						alt=""
 					/>
-				</section>
+				</div>
 			</nav>
-			<hr className="h-px bg-gray-200 border-0  dark:bg-gray-400" />
+			<hr className="h-px bg-gray-200 border-0 dark:bg-gray-400" />
 		</main>
 	);
 }

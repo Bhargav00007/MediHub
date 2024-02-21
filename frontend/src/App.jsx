@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
+import Upload from "./pages/Upload";
 
 function App() {
 	return (
@@ -21,6 +22,9 @@ function App() {
 					<Route
 						path="/"
 						element={<Home></Home>}></Route>
+					<Route
+						path="/upload"
+						element={<Upload></Upload>}></Route>
 				</Routes>
 			</BrowserRouter>
 		</>

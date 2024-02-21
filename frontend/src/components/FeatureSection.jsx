@@ -4,7 +4,7 @@ export default function FeatureSection() {
 	return (
 		<div className="grid gap-10 lg:grid-cols-2 px-9 ">
 			<FeaturesCards
-				title={"Reports"}
+				title={"Lab Reports"}
 				description={
 					"View all your medical reports and test results here."
 				}
@@ -12,7 +12,7 @@ export default function FeatureSection() {
 					"https://www.newbreedrevenue.com/hs-fs/hubfs/reporting.png?width=775&name=reporting.png"
 				}></FeaturesCards>
 			<FeaturesCards
-				title={"Reminders"}
+				title={"Diagnosis Reports"}
 				description={
 					"Manage your appointments and medication reminders here."
 				}
