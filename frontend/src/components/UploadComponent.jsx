@@ -6,6 +6,7 @@ export default function UploadComponent() {
 	const [description, setDescription] = useState("");
 	const [reportdate, setReportDate] = useState("");
 	const [tags, setTags] = useState("");
+	const [type, setType] = useState("diagnosis");
 	const [file, setFile] = useState("");
 
 	async function submitFile(e) {
@@ -14,6 +15,7 @@ export default function UploadComponent() {
 		formData.append("title", title);
 		formData.append("description", description);
 		formData.append("reportDate", reportdate);
+		formData.append("type", type);
 		formData.append("tags", tags);
 		formData.append("file", file);
 		console.log(title, file);
@@ -37,7 +39,7 @@ export default function UploadComponent() {
 					Title
 					<input
 						onChange={(e) => {
-							setTitle(e.target.value);
+							setTitle(e.target.value.toLowerCase().trim());
 						}}
 						type="text"
 						required
@@ -50,7 +52,7 @@ export default function UploadComponent() {
 					Description
 					<input
 						onChange={(e) => {
-							setDescription(e.target.value);
+							setDescription(e.target.value.toLowerCase().trim());
 						}}
 						type="text"
 					/>
@@ -73,10 +75,24 @@ export default function UploadComponent() {
 				<br />
 
 				<label>
+					Type
+					<select
+						name="type"
+						id="type"
+						value={type}
+						onChange={(e) => setType(e.target.value)}>
+						<option value="diagnosis">Diagnosis</option>
+						<option value="lab">Lab</option>
+					</select>
+				</label>
+				<br />
+				<br />
+
+				<label>
 					Tags
 					<input
 						onChange={(e) => {
-							setTags(e.target.value);
+							setTags(e.target.value.toLowerCase().trim());
 						}}
 						type="text"
 					/>
