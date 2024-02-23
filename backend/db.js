@@ -7,11 +7,17 @@ mongoose.connect(process.env.MONGODB_URL);
 const pdfSchema = new mongoose.Schema({
     title: {
         type: String,
+        trim: true,
         required: true
     },
     description: {
         type: String,
-    }, tags: {
+        trim: true,
+    }, type: {
+        type: String,
+        trim: true,
+    },
+    tags: {
         type: [String],
         default: []
     },

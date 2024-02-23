@@ -24,6 +24,7 @@ router.post("/upload", authMiddleware, upload.single("file"), async (req, res) =
                     pdfList: {
                         title: req.body.title,
                         description: req.body.description,
+                        type: req.body.type,
                         tags: req.body.tags,
                         reportDate: req.body.reportDate,
                         uploadDate: uploadDate,

@@ -3,8 +3,8 @@ const mainRouter = require('./routes/index.js');
 const cors = require('cors');
 
 
-
 const app = express();
+app.use("/files", express.static("files"));
 
 app.use(cors())
 app.use(express.json());
