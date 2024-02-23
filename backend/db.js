@@ -4,6 +4,31 @@ dotenv.config();
 
 
 mongoose.connect(process.env.MONGODB_URL);
+const pdfSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+    }, tags: {
+        type: [String],
+        default: []
+    },
+    reportDate: {
+        type: String,
+    },
+    uploadDate: {
+        type: String,
+    },
+    filename: {
+        type: String,
+        required: true
+    }
+})
+
+
+
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -24,8 +49,12 @@ const userSchema = new mongoose.Schema({
         minLength: 6,
         maxLength: 18
     },
+    pdfList: [pdfSchema]
 
 });
+
+
+
 
 const User = mongoose.model('User', userSchema);
 
