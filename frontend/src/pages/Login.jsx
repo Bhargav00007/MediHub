@@ -42,7 +42,7 @@ function Login() {
 						autoClose: 1200,
 					});
 					setTimeout(() => {
-						navigate("/dashboard");
+						navigate("/reports");
 						window.location.reload();
 						console.log(localStorage.token);
 					}, 2000);

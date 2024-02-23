@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import DeleteButton from "../components/DeleteButton";
 import PdfComp from "../components/PdfComp";
+import Logout from "../components/Logout";
 
 export default function ShowReports({ type }) {
 	const [allReports, setAllReports] = useState(null);
@@ -55,11 +56,14 @@ export default function ShowReports({ type }) {
 				<button
 					className="bg-green-400 rounded-sm"
 					onClick={(e) => {
+						// opens pdf in another page
 						window.open(
 							"http://localhost:3000/files/" + filename + ".pdf",
 							"_blank",
 							"noreferrer"
 						);
+
+						// to open pdf in same page
 						// setPdfFile(
 						// 	"http://localhost:3000/files/" +
 						// 		{ filename } +
@@ -75,6 +79,8 @@ export default function ShowReports({ type }) {
 	return (
 		<div className="text-center">
 			<h4>All reports</h4>
+			<p>add reports inorder to view them</p>
+
 			<div>
 				<Link
 					className="pl-1 underline cursor-pointer pointer"
@@ -82,6 +88,8 @@ export default function ShowReports({ type }) {
 					Upload page
 				</Link>
 			</div>
+
+			<Logout></Logout>
 			<div className="grid ">
 				<ReportSection reports={allReports}></ReportSection>
 			</div>
