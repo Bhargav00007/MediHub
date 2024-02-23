@@ -2,18 +2,24 @@ import natureImg from "../img/nature.jpg";
 import Button from "../components/Button";
 import Break from "../components/Break";
 import BottomWarning from "../components/BottomWarning";
+import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
+	const navigate = useNavigate();
+
 	const formik = useFormik({
 		initialValues: {
-			email: "",
+			username: "",
 			password: "",
 		},
 		validationSchema: Yup.object({
-			email: Yup.string()
+			username: Yup.string()
 				.email("Invalid Email address")
 				.required("Email is required"),
 			password: Yup.string()
@@ -21,8 +27,32 @@ function Login() {
 				.max(18, "Password must be 18 characters or less")
 				.required("Password is required"),
 		}),
-		onSubmit: (values) => {
-			console.log(values);
+		onSubmit: async (values) => {
+			try {
+				const res = await axios.post(
+					"http://localhost:3000/api/v1/user/login",
+
+					values
+				);
+
+				if (res.status === 200) {
+					localStorage.setItem("token", res.data.token);
+					toast.success("User Login", {
+						theme: "light",
+						autoClose: 1200,
+					});
+					setTimeout(() => {
+						navigate("/dashboard");
+						window.location.reload();
+						console.log(localStorage.token);
+					}, 2000);
+				}
+			} catch (e) {
+				toast.warn("Email doesn't exist / Incorrect inputs", {
+					theme: "light",
+					autoClose: 1200,
+				});
+			}
 		},
 	});
 	return (
@@ -41,16 +71,16 @@ function Login() {
 							action="">
 							<div className="flex flex-col">
 								<label
-									htmlFor="email"
+									htmlFor="username"
 									className="px-1 text-xs">
 									Email
 								</label>
 								<input
 									className="p-1 text-sm border-2 border-gray-200 outline-none rounded-xl focus:border-blue-300"
 									type="Email"
-									name="email"
+									name="username"
 									placeholder="Enter your Last Name"
-									value={formik.values.email}
+									value={formik.values.username}
 									onChange={formik.handleChange}
 								/>
 							</div>
@@ -88,6 +118,7 @@ function Login() {
 					</div>
 				</div>
 			</div>
+			<ToastContainer />
 		</section>
 	);
 }

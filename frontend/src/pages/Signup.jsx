@@ -54,7 +54,7 @@ function Signup() {
 						autoClose: 1200,
 					});
 					setTimeout(() => {
-						navigate("/dashboard");
+						navigate("/login");
 					}, 2000);
 				}
 			} catch (e) {
@@ -62,9 +62,6 @@ function Signup() {
 					theme: "light",
 					autoClose: 1200,
 				});
-				setTimeout(() => {
-					navigate("/dashboard");
-				}, 2000);
 			}
 		},
 	});
