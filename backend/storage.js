@@ -8,9 +8,13 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
 
         const date = new Date()
-        const todaysDate = date.getDate().toString() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
+        const todaysDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate().toString()
         const currentTime = date.getHours().toString() + "-" + date.getMinutes() + "-" + date.getSeconds();
-        cb(null, todaysDate + "_" + currentTime + "_" + file.originalname);
+        const filename = todaysDate + "_" + currentTime + "_" + req.body.title
+        req.filename = filename
+
+        // cb(null, todaysDate + "_" + currentTime + "_" + req.body.title + ".pdf");
+        cb(null, req.filename + ".pdf");
     },
 });
 
