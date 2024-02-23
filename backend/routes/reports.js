@@ -1,36 +1,23 @@
 const express = require("express")
-const { User } = require("../db.js")
-const zod = require('zod');
-const jwt = require('jsonwebtoken')
+const { User } = require("../db.js");
 const dotenv = require('dotenv');
 const { authMiddleware } = require("../middleware.js");
+const { upload } = require("../storage.js");
 dotenv.config();
+
 
 const router = express.Router();
 
-router.post("/upload2", async (req, res) => {
 
+
+
+router.post("/upload", authMiddleware, upload.single("file"), async (req, res) => {
     try {
-        const userData = await User.updateOne({ _id: req.userId }, {
-            $push: {
-                pdfList: {
-                    title: req.body.title,
-                    description: req.body.description,
-                    reportDate: req.body.reportDate,
-                    uploadDate: req.body.uploadDate,
-                    filename: req.body.filename
-                }
-            }
-        })
-        res.json({ msg: "PDF added successfully", userData });
-    } catch (e) {
-        res.status(500).json({ error: "Internal server error" });
-    }
-})
+        const date = new Date()
+        const todaysDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate().toString()
+        const currentTime = date.getHours().toString() + "-" + date.getMinutes() + "-" + date.getSeconds();
+        const uploadDate = todaysDate + "_" + currentTime
 
-
-router.post("/upload", authMiddleware, async (req, res) => {
-    try {
         const userData = await User.findByIdAndUpdate(
             req.userId,
             {
@@ -40,7 +27,7 @@ router.post("/upload", authMiddleware, async (req, res) => {
                         description: req.body.description,
                         tags: req.body.tags,
                         reportDate: req.body.reportDate,
-                        uploadDate: req.body.uploadDate,
+                        uploadDate: uploadDate,
                         filename: req.body.filename
                     }
                 }
