@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Upload from "./pages/Upload";
 import UploadComponent from "./components/UploadComponent";
+import ShowReports from "./pages/Reports";
 
 function App() {
 	return (
@@ -21,11 +22,11 @@ function App() {
 						path="/dashboard"
 						element={<Dashboard></Dashboard>}></Route>
 					<Route
-						path="/"
-						element={<UploadComponent></UploadComponent>}></Route>
+						path="/reports"
+						element={<ShowReports></ShowReports>}></Route>
 					<Route
 						path="/upload"
-						element={<Upload></Upload>}></Route>
+						element={<UploadComponent></UploadComponent>}></Route>
 				</Routes>
 			</BrowserRouter>
 		</>
