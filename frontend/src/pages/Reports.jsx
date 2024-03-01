@@ -7,15 +7,14 @@ import Logout from "../components/Logout";
 
 export default function ShowReports({ type }) {
 	const [allReports, setAllReports] = useState(null);
-	const [pdfFile, setPdfFile] = useState(null);
+	const [pdfFile, setPdfFile] = useState("");
 
 	async function getReports(type) {
 		const res = await axios.get(
 			"http://localhost:3000/api/v1/report/bulk?type=",
 			{
 				headers: {
-					Authorization:
-						"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWQ4MzcxNzE2NDNkY2YwYTQ5MmZhYzgiLCJpYXQiOjE3MDg2OTM4MDR9.sm13PKxTztbK-UueC4e9X6Qw6G5QAwElnLTAJzWSoNk",
+					Authorization: "Bearer " + localStorage.token,
 				},
 			}
 		);
@@ -56,19 +55,7 @@ export default function ShowReports({ type }) {
 				<button
 					className="bg-green-400 rounded-sm"
 					onClick={(e) => {
-						// opens pdf in another page
-						window.open(
-							"http://localhost:3000/files/" + filename + ".pdf",
-							"_blank",
-							"noreferrer"
-						);
-
-						// to open pdf in same page
-						// setPdfFile(
-						// 	"http://localhost:3000/files/" +
-						// 		{ filename } +
-						// 		".pdf"
-						// );
+						setPdfFile(filename);
 					}}>
 					Show Report
 				</button>

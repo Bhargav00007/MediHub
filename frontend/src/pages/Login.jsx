@@ -91,7 +91,7 @@ function Login() {
 									Password
 								</label>
 								<input
-									className="p-1 text-sm text-base border-2 border-gray-200 outline-none rounded-xl focus:border-blue-300"
+									className="p-1 border-2 border-gray-200 outline-none rounded-xl focus:border-blue-300"
 									type="Password"
 									name="password"
 									placeholder="Enter your Password"

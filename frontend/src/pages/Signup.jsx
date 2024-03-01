@@ -49,12 +49,13 @@ function Signup() {
 					}
 				);
 				if (res.status === 200) {
+					localStorage.token = res.data.token;
 					toast.success("User Created", {
 						theme: "light",
 						autoClose: 1200,
 					});
 					setTimeout(() => {
-						navigate("/login");
+						navigate("/reports");
 					}, 2000);
 				}
 			} catch (e) {

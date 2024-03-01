@@ -26,8 +26,7 @@ export default function UploadComponent() {
 			{
 				headers: {
 					"Content-Type": "multipart/form-data",
-					Authorization:
-						"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWQ4MzcxNzE2NDNkY2YwYTQ5MmZhYzgiLCJpYXQiOjE3MDg2Njg2OTh9.VpSEFhDeqMzvQo9zVStVf_Lf0HjLVvbmSPVXv8yofkM",
+					Authorization: "Bearer " + localStorage.token,
 				},
 			}
 		);
